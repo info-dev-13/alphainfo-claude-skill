@@ -1,0 +1,22 @@
+{
+  "name": "alphainfo",
+  "description": "Eyes for AI agents on time-series data — anomaly detection, regime change, multi-sensor fault isolation, classification, and auto-inference. Self-correcting cascade. Plan-aware. Audit-replayable.",
+  "version": "1.0.0",
+  "author": {
+    "name": "AlphaInfo",
+    "email": "contato@alphainfo.io"
+  },
+  "homepage": "https://www.alphainfo.io",
+  "repository": "https://github.com/info-dev-13/alphainfo-claude-skill",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "alphainfo",
+    "time-series",
+    "anomaly-detection",
+    "regime-change",
+    "observability",
+    "mlops",
+    "signal-processing"
+  ]
+}

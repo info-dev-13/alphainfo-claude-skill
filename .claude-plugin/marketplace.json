@@ -1,0 +1,46 @@
+{
+  "name": "alphainfo-marketplace",
+  "owner": {
+    "name": "AlphaInfo",
+    "email": "contato@alphainfo.io"
+  },
+  "metadata": {
+    "description": "AlphaInfo skills for time-series structural analysis — anomaly detection, regime change, multi-sensor fault isolation, classification.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "alphainfo",
+      "source": "./plugins/alphainfo",
+      "description": "Eyes for AI agents on time-series data. Self-correcting cascade detects anomalies, locates regime changes, isolates failing sensors (canal delator), classifies signals, and auto-infers domains in one HTTP call. Validated 100% CV on real PhysioNet ECG via autotune. Free tier 50 calls/month.",
+      "version": "1.0.0",
+      "author": {
+        "name": "AlphaInfo",
+        "email": "contato@alphainfo.io"
+      },
+      "homepage": "https://www.alphainfo.io",
+      "repository": "https://github.com/info-dev-13/alphainfo-claude-skill",
+      "license": "MIT",
+      "category": "Data Analysis",
+      "keywords": [
+        "claude-code",
+        "alphainfo",
+        "time-series",
+        "anomaly-detection",
+        "regime-change",
+        "observability",
+        "mlops",
+        "signal-processing",
+        "monitoring",
+        "classification"
+      ],
+      "tags": [
+        "structural-intelligence",
+        "ai-agents",
+        "self-correcting",
+        "plan-aware",
+        "audit-replayable"
+      ]
+    }
+  ]
+}
