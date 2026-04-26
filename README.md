@@ -18,7 +18,7 @@ Plus **autotune layer** that automatically finds the best config for your data (
 ## Install (one line)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/alphainfo-io/claude-skill/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/info-dev-13/alphainfo-claude-skill/main/install.sh | sh
 ```
 
 This:
@@ -31,7 +31,7 @@ This:
 
 ```bash
 # 1. Install (one line)
-curl -fsSL https://raw.githubusercontent.com/alphainfo-io/claude-skill/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/info-dev-13/alphainfo-claude-skill/main/install.sh | sh
 
 # 2. Get a free key (50 analyses/month, no credit card)
 open https://www.alphainfo.io/register?ref=claude-skill

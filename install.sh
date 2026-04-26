@@ -12,7 +12,7 @@
 
 set -euo pipefail
 
-REPO_URL="${ALPHAINFO_SKILL_REPO:-https://github.com/alphainfo-io/claude-skill}"
+REPO_URL="${ALPHAINFO_SKILL_REPO:-https://github.com/info-dev-13/alphainfo-claude-skill}"
 INSTALL_DIR="${HOME}/.claude/skills/alphainfo"
 ENV_DIR="${HOME}/.alphainfo"
 ENV_FILE="${ENV_DIR}/.env"
