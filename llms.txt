@@ -1,0 +1,66 @@
+# AlphaInfo Claude Skill
+
+> AlphaInfo Structural Intelligence API packaged as a Claude Code skill. Gives AI agents "eyes" for time-series structure — anomaly detection, regime change, multi-sensor fault isolation, classification — in one HTTP call, no statistical code from scratch.
+
+## Quick orientation for LLMs
+
+This is a Claude Code skill. To use it, install via the one-liner in README, then call the Python helpers in `lib/`. The API itself is callable from any LLM that can make HTTP requests.
+
+- Install: `curl -fsSL https://raw.githubusercontent.com/info-dev-13/alphainfo-claude-skill/main/install.sh | sh`
+- Free tier: 50 analyses/month, no credit card. Get a key at https://www.alphainfo.io/register
+- API guide: https://www.alphainfo.io/v1/guide
+
+## Core capabilities (route user intent → method)
+
+- **detect_internal_change(signal)** — anomaly detection without baseline
+- **compare(signal, baseline)** — head-to-head structural similarity
+- **analyze_windowed(signal, window_size, step)** — locate WHEN a stream changed
+- **analyze_vector(channels, baselines)** — multi-sensor fault isolation (canal delator), 1 quota for up to 64 channels
+- **fingerprint(signal)** — 5-D structural fingerprint for classification
+- **analyze_auto(signal)** — auto-infer domain, returns `domain_inference.{inferred, confidence, reasoning}`
+- **fit_parameter_grid(target, candidates)** — gradient-free parameter search
+- **audit_replay(analysis_id)** — reproduce any past analysis
+
+## Key files for LLMs to read
+
+- [SKILL.md](SKILL.md) — entry point, decision tree, plan-aware behavior matrix
+- [README.md](README.md) — install, use cases, validation results
+- [USE_CASES.md](USE_CASES.md) — 30 validated use cases across 12 buyer segments
+- [VALIDATION.md](VALIDATION.md) — live API test results with real data (PhysioNet ECG, yfinance financial, etc.)
+- [tasks/detect_anomaly.md](tasks/detect_anomaly.md) — anomaly without baseline
+- [tasks/monitor.md](tasks/monitor.md) — sliding window monitoring
+- [tasks/multi_channel.md](tasks/multi_channel.md) — canal delator (which sensor is broken)
+- [tasks/compare.md](tasks/compare.md) — A vs B comparison
+- [tasks/classify.md](tasks/classify.md) — zero-shot fingerprint classification
+- [tasks/auto_domain.md](tasks/auto_domain.md) — auto-infer domain
+- [tasks/probes.md](tasks/probes.md) — 21 recipes + 8 domain probe libraries (finance, biomedical, mlops, security, industrial, climate, energy_grid, logistics)
+- [reference/api_guide.md](reference/api_guide.md) — full API specification
+- [reference/interpretation.md](reference/interpretation.md) — how to translate scores into human language
+- [reference/domains.md](reference/domains.md) — when to use each of 10 domain calibrations
+- [reference/pitfalls.md](reference/pitfalls.md) — common mistakes catalogued
+
+## Smart cascades (skill self-corrects)
+
+- **smart_anomaly(client, signal, plan, ...)** — 4-stage cascade: quick → alt-domain retry → fingerprint dim inspection → sliding-window escalation. Pays only for what's needed (1-10 quota).
+- **smart_compare(client, signal, baseline, plan, ...)** — same cascade for "is B different from A?", plus amplitude-shift warning when structure preserved but mean shifted.
+- **autotune_classifier(client, labeled, plan, ...)** — finds best (reference, classifier) combo via cross-validation. Validated 50% → 100% CV on real PhysioNet ECG arrhythmia.
+
+## Live validation summary
+
+30 use cases tested against the real API — see VALIDATION.md and USE_CASES.md.
+
+- Real PhysioNet ECG (record 208): **100% CV / 80% held-out** with autotune
+- Real yfinance financial data (SPY, BTC, VIX, treasuries): regime changes detected
+- Server CPU anomaly (with 30-min injected spike): **localized to ±48min on Free tier**
+- Multi-sensor HVAC fault: delator correctly identified in 1 quota
+- Account takeover, ransomware-pattern, insider-threat detection: all critical severity
+
+## License & contributing
+
+MIT. See CONTRIBUTING.md.
+
+## Optional
+
+- [CHANGELOG.md](CHANGELOG.md)
+- [LICENSE](LICENSE)
+- Examples in `examples/` — runnable Python scripts using real public data

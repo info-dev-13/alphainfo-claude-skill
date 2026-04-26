@@ -1,6 +1,17 @@
-# AlphaInfo for Claude
+# AlphaInfo — eyes for AI agents
 
-> **Give Claude eyes for time-series structure.** A Claude Code skill that wires the [AlphaInfo Structural Intelligence API](https://www.alphainfo.io) into your Claude conversations — so you can detect anomalies, find regime changes, isolate failing sensors, and classify signals **without writing statistical code from scratch**.
+> **Give your AI agent structural eyes for any time series.** AlphaInfo is the [Structural Intelligence API](https://www.alphainfo.io) — it perceives signal *structure* (not just numbers), and this repo packages it as a [Claude Code](https://claude.ai/code) skill so Claude can detect anomalies, isolate failing sensors, and classify signals **in one line, no statistical code**.
+
+The same primitives plug into any agent SDK that can read a SKILL.md or call an HTTP API: Claude Code today, Claude Agent SDK, custom orchestrators, ChatGPT-style function calling.
+
+## Why this matters for AI
+
+LLMs read numbers but can't *see* signal structure. Without an "eye" they fall back on:
+- z-score / 3σ rules (fragile, false positives)
+- Writing pandas + scipy code from scratch (slow, brittle)
+- Training a classifier (overkill, no labeled data)
+
+With AlphaInfo, the agent calls **one HTTP endpoint** and gets back: severity, alert level, recommended action, audit ID, and a 5-D structural fingerprint. **The skill makes Claude reach for it instinctively** — and self-corrects when the first call gives a borderline answer.
 
 ## What this is
 
@@ -204,6 +215,29 @@ and logistics.
 - 🏛️ **Enterprise**: unlimited, dedicated endpoint, 99.9% SLA
 
 [Pricing details](https://www.alphainfo.io/pricing?ref=claude-skill) · [API Guide](https://www.alphainfo.io/v1/guide) · [Recipe Library](https://www.alphainfo.io/v1/recipes)
+
+## For AI / agent builders
+
+This skill is **AI-friendly by design**:
+
+- **Self-describing**: `SKILL.md` and `tasks/*.md` use action-first prose other LLMs can read and route on.
+- **Plan-aware**: `lib/plan.py` reads `client.rate_limit_info` and adapts call patterns automatically.
+- **Self-correcting**: `smart_anomaly()` and `smart_compare()` cascades try alt-domain → fingerprint inspection → sliding window before returning a "meh" result.
+- **Audit-replayable**: every call returns a UUID; full reproducibility via `audit_replay()`.
+- **Open**: `llms.txt` at root maps key reference files for any LLM crawler.
+
+If you're building an agent that needs to monitor time-series, regime, or sensor data — this is the lowest-friction path. The underlying API has a free tier (50 analyses/month, no card) so your agent can try it before any user pays.
+
+### Example prompts that route to this skill
+
+When Claude (or any LLM) sees these patterns, the skill activates:
+
+- *"is this CSV column anomalous?"* → `detect_internal_change`
+- *"compare metric X before and after deploy"* → `compare`
+- *"which of my 8 sensors is misbehaving?"* → `analyze_vector` (canal delator)
+- *"when did this stream change?"* → `analyze_windowed` (with auto-localization)
+- *"classify these signals as healthy/faulty"* → `autotune_classifier` (zero-shot via fingerprint)
+- *"unknown signal, what's it look like?"* → `analyze_auto` (infers domain + reasoning)
 
 ## License
 
